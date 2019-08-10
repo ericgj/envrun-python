@@ -11,13 +11,40 @@ envrun-python
 
 Run command with specified environment-variable file
 
-Quickstart
-----------
+Install
+-------
+
+::
+
+  pip install envrun-python
+
 
 Usage
 -----
 
+Run specifying environment variables in YAML format::
+
+  envrun -f env.yaml "somecmd $SOMEVAR"
+
+
+Or JSON, or .env format::
+
+  envrun -f .env "somecmd $SOMEVAR"
+
+
+Run within a python virtualenv::
+
+  envrun -e .venv pytest
+
+
+That's basically it.
+
+Note the .env format parser is taken from
+`python-dotenv <https://github.com/theskumar/python-dotenv>`_.
+
+
 Contact
 -------
 
-`Eric Gjertsen <ericgj72@gmail.com>`
+`Eric Gjertsen <ericgj72@gmail.com>`_.
+
