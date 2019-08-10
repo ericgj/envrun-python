@@ -5,6 +5,7 @@ import re
 from setuptools import find_packages
 from setuptools import setup
 
+from envrun import __version__
 
 def read(filename):
     filename = os.path.join(os.path.dirname(__file__), filename)
@@ -15,7 +16,7 @@ def read(filename):
 
 setup(
     name="envrun-python",
-    version="0.0.1",
+    version=__version__,
     url="https://github.com/ericgj/envrun-python",
     license="MIT",
     author="Eric Gjertsen",
