@@ -2,28 +2,33 @@ from tempfile import NamedTemporaryFile
 import pytest
 from envrun.__main__ import main
 
+
 def test_no_env_no_venv():
-    main(['ls -la'])
+    main(["ls -la"])
     assert True
 
+
 def test_yaml_env_no_venv(env_fixture_yaml):
-    for fname in wrap_fixture_file(env_fixture_yaml, suffix='.yaml'):
-        main(['-f', fname, 'echo $FOO']) 
+    for fname in wrap_fixture_file(env_fixture_yaml, suffix=".yaml"):
+        main(["-f", fname, "echo $FOO"])
         assert True
 
+
 def test_dot_env_no_venv(env_fixture_dotenv):
-    for fname in wrap_fixture_file(env_fixture_dotenv, suffix='.env'):
-        main(['-f', fname, 'echo $BAR']) 
+    for fname in wrap_fixture_file(env_fixture_dotenv, suffix=".env"):
+        main(["-f", fname, "echo $BAR"])
         assert True
+
 
 def test_no_env_with_venv():
     """ Note this cheats a bit and assumes .env virtualenv exists """
-    main(['-e', '.env', 'ls -la'])
+    main(["-e", ".env", "ls -la"])
     assert True
 
+
 def test_yaml_env_with_venv(env_fixture_yaml):
-    for fname in wrap_fixture_file(env_fixture_yaml, suffix='.yaml'):
-        main(['-e', '.env', '-f', fname, 'echo $BAZ']) 
+    for fname in wrap_fixture_file(env_fixture_yaml, suffix=".yaml"):
+        main(["-e", ".env", "-f", fname, "echo $BAZ"])
         assert True
 
 
@@ -36,18 +41,17 @@ def wrap_fixture_file(fixture, suffix=None):
 
 @pytest.fixture
 def env_fixture_yaml():
-    return (b"""
+    return b"""
 FOO: bar
 BAR: baz
 BAZ: quux
 """
-    )
+
 
 @pytest.fixture
 def env_fixture_dotenv():
-    return (b"""
+    return b"""
 FOO=bar
 BAR =  baz
 BAZ =quux
 """
-   )

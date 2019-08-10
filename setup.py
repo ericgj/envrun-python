@@ -25,10 +25,8 @@ setup(
     description="Run command with specified environment-variable file",
     long_description=read("README.rst"),
     packages=find_packages(exclude=("test",)),
-    install_requires=[
-        "ruamel.yaml"
-    ],
-    entry_points={ 'console_scripts': [ 'envrun = envrun.__main__:main' ] },
+    install_requires=["ruamel.yaml"],
+    entry_points={"console_scripts": ["envrun = envrun.__main__:main"]},
     classifiers=[
         "Development Status :: 2 - Pre-Alpha",
         "License :: OSI Approved :: MIT License",

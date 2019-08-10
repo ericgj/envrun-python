@@ -1,7 +1,15 @@
 import codecs
 import re
-from typing import (IO, Iterator, Match, NamedTuple, Optional, Pattern,  # noqa
-                    Sequence, Text)
+from typing import (
+    IO,
+    Iterator,
+    Match,
+    NamedTuple,
+    Optional,
+    Pattern,  # noqa
+    Sequence,
+    Text,
+)
 
 from .compat import to_text
 
@@ -25,9 +33,9 @@ _rest_of_line = make_regex(r"[^\r\n]*(?:\r|\n|\r\n)?")
 _double_quote_escapes = make_regex(r"\\[\\'\"abfnrtv]")
 _single_quote_escapes = make_regex(r"\\[\\']")
 
-Binding = NamedTuple("Binding", [("key", Optional[Text]),
-                                 ("value", Optional[Text]),
-                                 ("original", Text)])
+Binding = NamedTuple(
+    "Binding", [("key", Optional[Text]), ("value", Optional[Text]), ("original", Text)]
+)
 
 
 class Error(Exception):
@@ -51,15 +59,15 @@ class Reader:
 
     def get_marked(self):
         # type: () -> Text
-        return self.string[self.mark:self.position]
+        return self.string[self.mark : self.position]
 
     def peek(self, count):
         # type: (int) -> Text
-        return self.string[self.position:self.position + count]
+        return self.string[self.position : self.position + count]
 
     def read(self, count):
         # type: (int) -> Text
-        result = self.string[self.position:self.position + count]
+        result = self.string[self.position : self.position + count]
         if len(result) < count:
             raise Error("read: End of string")
         self.position += count
@@ -78,7 +86,7 @@ def decode_escapes(regex, string):
     # type: (Pattern[Text], Text) -> Text
     def decode_match(match):
         # type: (Match[Text]) -> Text
-        return codecs.decode(match.group(0), 'unicode-escape')  # type: ignore
+        return codecs.decode(match.group(0), "unicode-escape")  # type: ignore
 
     return regex.sub(decode_match, string)
 
