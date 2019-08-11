@@ -24,12 +24,12 @@ Usage
 
 Run specifying environment variables in YAML format::
 
-  envrun -f env.yaml somecmd $SOMEVAR
+  envrun -f env.yaml somecmd arg1 arg2
 
 
 Or JSON, or .env format::
 
-  envrun -f .env somecmd $SOMEVAR
+  envrun -f .env somecmd arg1 arg2
 
 
 Run within a python virtualenv::
