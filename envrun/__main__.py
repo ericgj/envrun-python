@@ -1,9 +1,8 @@
 import sys
-from argparse import ArgumentParser
+from argparse import ArgumentParser, REMAINDER
 from .runner import run
 
 cmd = ArgumentParser(description="Run with environment variables specified in a file")
-cmd.add_argument("cmd", help="Command to run")
 cmd.add_argument(
     "-f",
     "--env-file",
@@ -16,6 +15,7 @@ cmd.add_argument(
     default=None,
     help="Python virtualenv to run within (optional)",
 )
+cmd.add_argument("cmd", nargs=REMAINDER, help="Command to run")
 
 
 def main(argv=sys.argv):

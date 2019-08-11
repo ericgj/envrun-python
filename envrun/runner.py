@@ -6,16 +6,16 @@ from .env import parse_file
 
 def run(cmd, env_file=None, virtualenv=None):
     run_in_subprocess(
-        cmds=[cmd] if virtualenv is None else [virtualenv_activate(virtualenv), cmd],
+        cmd=cmd
+        if virtualenv is None
+        else [virtualenv_activate(virtualenv), "&&"] + cmd,
         env={} if env_file is None else parse_file(env_file),
     )
 
 
-def run_in_subprocess(cmds, env):
+def run_in_subprocess(cmd, env):
     if "SYSTEMROOT" in os.environ:
         env["SYSTEMROOT"] = os.environ["SYSTEMROOT"]  # Note: Windows needs
-
-    cmd = " && ".join(cmds)
 
     if hasattr(subprocess, "run"):
         subprocess.run(cmd, shell=True, check=True, env=env)

@@ -4,19 +4,19 @@ from envrun.__main__ import main
 
 
 def test_no_env_no_venv():
-    main(["ls -la"])
+    main(["ls", "-la"])
     assert True
 
 
 def test_yaml_env_no_venv(env_fixture_yaml):
     for fname in wrap_fixture_file(env_fixture_yaml, suffix=".yaml"):
-        main(["-f", fname, "echo $FOO"])
+        main(["-f", fname, "echo", "$FOO"])
         assert True
 
 
 def test_dot_env_no_venv(env_fixture_dotenv):
     for fname in wrap_fixture_file(env_fixture_dotenv, suffix=".env"):
-        main(["-f", fname, "echo $BAR"])
+        main(["-f", fname, "echo", "$BAR"])
         assert True
 
 
